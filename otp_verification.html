@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Treasure Tide - OTP Verification</title>
+    <link rel="stylesheet" href="login.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="space-bg">
+        <div id="star-background"></div> 
+    </div>
+    
+    <div class="content-wrapper">
+        <header class="logo-section">
+            <h1 class="glitch-text" data-text="VERIFY ACCESS">VERIFY ACCESS</h1>
+            <p>Authentication Required</p>
+        </header>
+
+        <main class="login-container">
+            <form class="otp-form">
+                
+                <h2>Enter Security Code (OTP)</h2>
+
+                <p class="instruction-text">
+                    A 6-digit verification code has been transmitted to your email. Please enter it below.
+                </p>
+
+                <div class="input-group otp-input-group">
+                    <label for="otp_code">Verification Code</label>
+                    <input type="text" id="otp_code" name="otp_code" placeholder="Enter 6 digits" maxlength="6" pattern="\d{6}" required>
+                </div>
+
+                <div class="actions center-actions">
+                    <a href="new_password.html" class="login-button verify-button" style="text-decoration: none; display: inline-block;">VERIFY CODE</a>
+                </div>
+                
+                <a href="#" class="auxiliary-link resend-link">Resend Code</a>
+
+                <p class="signup-prompt">
+                    <a href="login.html" class="create-account-link">Return to Login</a>
+                </p>
+
+            </form>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
