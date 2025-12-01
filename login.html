@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Treasure Tide - Login</title>
+    <link rel="stylesheet" href="login.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="space-bg">
+        <div id="star-background"></div> 
+    </div>
+    
+    <div class="content-wrapper">
+        <header class="logo-section">
+            <h1 class="glitch-text" data-text="ACCESS VAULT">ACCESS VAULT</h1>
+            <p>Ready to Initiate Flow?</p>
+        </header>
+
+        <main class="login-container">
+            <form class="login-form">
+                
+                <h2>Player Login</h2>
+                
+                <div class="input-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" placeholder="Your chosen game tag" required>
+                </div>
+                <div class="input-group">
+                    <label for="gaming_id">Gaming ID</label>
+                    <input type="text" id="gaming_id" name="gaming_id" placeholder="Your unique player ID" required>
+                </div>
+                <div class="input-group">
+                    <label for="email">Email ID</label>
+                    <input type="email" id="email" name="email" placeholder="Contact email" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Secure password" required>
+                </div>
+
+                 
+                <a href="forgot_password.html" class="auxiliary-link forgot-password-link">Forgot Password?</a>
+<a href="menu.html" class="login-button">LOG IN</a>
+                <p class="signup-prompt">
+                    Don't have an account? <a href="signup.html" class="create-account-link">Create one</a>
+                </p>
+
+            </form>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
