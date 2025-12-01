@@ -1,0 +1,306 @@
+/* --- Custom Colors and Global Reset --- */
+:root {
+    --bg1: #3b0f3e; /* deep purple */
+    --bg2: #8b1f5f, #1aaeb0; /* dusky pink */
+    --bg3: #1aaeb0; /* teal accent */
+    --text-light: #f0f0ff;
+    --card-bg-dark: rgba(27, 2, 34, 0.6);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Orbitron', sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, var(--bg1) 0%, var(--bg2) 100%);
+    color: var(--text-light);
+    min-height: 100vh;
+    overflow: hidden; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+/* --- Background Ripple Effect --- */
+body::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 200vw;
+    height: 200vh;
+    background: radial-gradient(circle at center, rgba(26, 174, 176, 0.1), transparent);
+    animation: ripple 10s infinite alternate;
+    pointer-events: none;
+    z-index: 0;
+}
+
+@keyframes ripple {
+    from { transform: translate(-50%, -50%) scale(0.5); opacity: 0.5; }
+    to { transform: translate(-50%, -50%) scale(1.5); opacity: 0.8; }
+}
+
+/* --- Animated Space Background Elements (Z-Index 1) --- */
+#space-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+/* --- Floating Transparent Planet Styling --- */
+.planet {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.2; 
+    filter: blur(15px); 
+}
+
+#jupiter {
+    width: 350px; 
+    height: 350px;
+    background: radial-gradient(circle, #f7a62d 0%, #e63946 70%);
+    top: 5%;
+    left: -175px;
+    animation: orbit-jupiter 60s linear infinite; 
+}
+
+#moon {
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, #c3c3c3 0%, #5d5d5d 70%);
+    bottom: -100px;
+    right: 5%;
+    animation: orbit-moon 50s linear infinite reverse; 
+}
+
+@keyframes orbit-jupiter {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(150vw, 50vh); }
+}
+
+@keyframes orbit-moon {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(-100vw, -80vh); }
+}
+
+/* --- Floating Rocket Ship (Ghostly/Transparent) --- */
+.rocket-ship {
+    position: absolute;
+    top: 80%;
+    left: 10%;
+    width: 40px;
+    height: 80px; 
+    background: rgba(255, 255, 255, 0.1); 
+    border-radius: 50% 50% 20% 20% / 30% 30% 70% 70%;
+    opacity: 0.5;
+    filter: blur(2px); 
+    animation: launch 30s linear infinite;
+    z-index: 2;
+    transform-origin: 50% 100%;
+}
+
+/* Rocket Fins */
+.rocket-ship::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: -15px;
+    width: 25px;
+    height: 30px;
+    background: rgba(26, 174, 176, 0.3); 
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+    transform: skewY(15deg);
+    border-radius: 0 0 0 10px;
+}
+
+/* Rocket Thruster (Fading pulse) */
+.rocket-ship .thruster {
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 30px;
+    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.5), rgba(26, 174, 176, 0.2));
+    clip-path: polygon(50% 100%, 0% 0%, 100% 0%);
+    animation: pulse-thruster 1s infinite alternate;
+}
+
+@keyframes pulse-thruster {
+    from { height: 25px; opacity: 0.8; filter: blur(1px); }
+    to { height: 40px; opacity: 0.4; filter: blur(5px); }
+}
+
+@keyframes launch {
+    0% { transform: translate(0, 0) rotate(-30deg); opacity: 0; }
+    5% { opacity: 0.5; }
+    100% { transform: translate(150vw, -150vh) rotate(-30deg); opacity: 0; } 
+}
+
+/* --- Content Wrapper (Z-Index 3) --- */
+.content-wrapper {
+    position: relative;
+    z-index: 3;
+    padding: 20px;
+    max-width: 1200px;
+    width: 90%;
+    text-align: center;
+}
+
+/* --- Logo Section Styling (Including new Special Logo) --- */
+.logo-section {
+    margin-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.special-logo {
+    width: 100px; /* Adjust size as needed */
+    height: 100px;
+    margin-bottom: 20px;
+    animation: logo-glow 3s infinite alternate; /* Subtle glow animation */
+}
+
+.special-logo svg {
+    width: 100%;
+    height: 100%;
+}
+
+@keyframes logo-glow {
+    from { filter: drop-shadow(0 0 5px var(--bg3)) brightness(1); }
+    to { filter: drop-shadow(0 0 15px var(--bg3)) brightness(1.2); }
+}
+
+
+/* --- Main Title Styling and Glitch Animation --- */
+.glitch-text {
+    font-size: 4rem;
+    font-weight: 800;
+    letter-spacing: 10px;
+    color: var(--bg3);
+    text-shadow: 0 0 10px var(--bg3), 0 0 20px rgba(26, 174, 176, 0.5);
+    position: relative;
+    margin-top: 0; /* Remove default margin from h1 */
+}
+/* Glitch keyframes for innovative title */
+.glitch-text::before, .glitch-text::after { content: attr(data-text); position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+.glitch-text::before { left: 2px; text-shadow: -2px 0 var(--bg2); clip: rect(44px, 9999px, 56px, 0); animation: glitch 5s infinite linear alternate-reverse; }
+.glitch-text::after { left: -2px; text-shadow: -2px 0 var(--bg3); clip: rect(85px, 9999px, 100px, 0); animation: glitch 6s infinite linear alternate; }
+@keyframes glitch {
+    0% { clip: rect(24px, 9999px, 80px, 0); transform: skew(0.5deg); }
+    50% { clip: rect(100px, 9999px, 30px, 0); transform: skew(-0.5deg); }
+    100% { clip: rect(70px, 9999px, 50px, 0); transform: skew(1deg); }
+}
+
+.logo-section p {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-top: 10px;
+}
+
+
+/* --- Card Section Styling and Animations --- */
+.card-section {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-bottom: 80px;
+}
+.card {
+    background: var(--card-bg-dark);
+    border: 2px solid var(--card-color);
+    border-radius: 25px;
+    padding: 30px;
+    width: 30%;
+    min-height: 280px;
+    backdrop-filter: blur(8px);
+    cursor: pointer;
+    text-align: center;
+    opacity: 0; 
+}
+
+/* Card Animation Application (Fade-in and Shaking) */
+.card-animate {
+    animation: 
+        fade-in 1s ease-out forwards, 
+        shaking 2s infinite ease-in-out alternate;
+}
+.card-section .card:nth-child(1) { animation-delay: 0.5s; }
+.card-section .card:nth-child(2) { animation-delay: 1.0s; }
+.card-section .card:nth-child(3) { animation-delay: 1.5s; }
+
+@keyframes fade-in {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes shaking {
+    0% { transform: translateX(0) scale(1); }
+    25% { transform: translateX(-2px) rotate(-0.5deg) scale(1.02); }
+    50% { transform: translateX(2px) rotate(0.5deg) scale(1); }
+    75% { transform: translateX(-1px) rotate(-0.2deg) scale(1.02); }
+    100% { transform: translateX(1px) rotate(0.1deg) scale(1); }
+}
+
+.card:hover {
+    box-shadow: 0 0 30px var(--card-color);
+    animation-play-state: paused; 
+    transform: scale(1.1) rotate(0); /* Removed translateZ from hover as 3D is removed */
+}
+
+.card-icon svg { width: 50px; height: 50px; stroke: var(--card-color); }
+
+/* --- Get Started Button Styling --- */
+.start-button {
+    text-decoration: none;
+    background: linear-gradient(90deg, var(--bg2), var(--bg3));
+    color: var(--text-light);
+    font-size: 1.6rem;
+    font-weight: 600;
+    padding: 18px 50px;
+    border-radius: 50px;
+    box-shadow: 0 0 25px var(--bg3);
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: inline-block;
+    letter-spacing: 3px;
+}
+
+.start-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 40px var(--bg3), 0 0 60px var(--bg2);
+}
+
+/* --- Responsive Design for smaller screens --- */
+@media (max-width: 900px) {
+    .glitch-text {
+        font-size: 2.5rem;
+        letter-spacing: 5px;
+    }
+    .logo-section p {
+        font-size: 1rem;
+    }
+    .card-section {
+        flex-direction: column;
+        gap: 20px;
+    }
+    .card {
+        width: 80%;
+        margin: 0 auto;
+    }
+    .start-button {
+        font-size: 1.2rem;
+        padding: 15px 30px;
+    }
+    .special-logo {
+        width: 80px;
+        height: 80px;
+    }
+}
