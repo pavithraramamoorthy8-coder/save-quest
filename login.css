@@ -1,0 +1,292 @@
+/* --- Custom Colors and Global Reset (Matching index.css) --- */
+:root {
+    --bg1: #3b0f3e; /* deep purple */
+    --bg2: #8b1f5f, #1aaeb0; /* dusky pink */
+    --bg3: #1aaeb0; /* teal accent */
+    --text-light: #f0f0ff;
+    --card-bg-dark: rgba(27, 2, 34, 0.6);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Orbitron', sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, var(--bg1) 0%, var(--bg2) 100%);
+    color: var(--text-light);
+    min-height: 100vh;
+    overflow: hidden; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+/* --- Background Ripple Effect (From index.css) --- */
+body::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 200vw;
+    height: 200vh;
+    background: radial-gradient(circle at center, rgba(26, 174, 176, 0.1), transparent);
+    animation: ripple 10s infinite alternate;
+    pointer-events: none;
+    z-index: 0;
+}
+
+@keyframes ripple {
+    from { transform: translate(-50%, -50%) scale(0.5); opacity: 0.5; }
+    to { transform: translate(-50%, -50%) scale(1.5); opacity: 0.8; }
+}
+
+/* --- Space Background Container (Star insertion point) --- */
+#space-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+/* --- Content Wrapper (Holds the logo and form) --- */
+.content-wrapper {
+    position: relative;
+    z-index: 3;
+    padding: 20px;
+    max-width: 500px;
+    width: 90%;
+    text-align: center;
+}
+
+/* --- Header and Glitch Title --- */
+.logo-section {
+    margin-bottom: 30px;
+}
+
+.glitch-text {
+    font-size: 3rem;
+    font-weight: 800;
+    letter-spacing: 8px;
+    color: var(--bg3);
+    text-shadow: 0 0 10px var(--bg3), 0 0 20px rgba(26, 174, 176, 0.5);
+    position: relative;
+}
+
+/* Glitch keyframes (Keep the same glitch animation) */
+.glitch-text::before, .glitch-text::after { content: attr(data-text); position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+.glitch-text::before { left: 2px; text-shadow: -2px 0 var(--bg2); clip: rect(20px, 9999px, 30px, 0); animation: glitch 5s infinite linear alternate-reverse; }
+.glitch-text::after { left: -2px; text-shadow: -2px 0 var(--bg3); clip: rect(60px, 9999px, 70px, 0); animation: glitch 6s infinite linear alternate; }
+
+@keyframes glitch {
+    0% { clip: rect(10px, 9999px, 40px, 0); transform: skew(0.5deg); }
+    50% { clip: rect(50px, 9999px, 20px, 0); transform: skew(-0.5deg); }
+    100% { clip: rect(30px, 9999px, 60px, 0); transform: skew(1deg); }
+}
+
+.logo-section p {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-top: 10px;
+}
+
+/* --- Login Form Styling --- */
+.login-container {
+    background: var(--card-bg-dark);
+    border: 2px solid var(--bg3);
+    border-radius: 15px;
+    padding: 40px;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 0 30px rgba(26, 174, 176, 0.5);
+}
+
+.login-form h2 {
+    font-size: 1.8rem;
+    color: var(--bg3);
+    margin-bottom: 25px;
+    text-shadow: 0 0 5px var(--bg3);
+}
+
+.input-group {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+    color: var(--text-light);
+    font-weight: 600;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--bg2);
+    border-radius: 8px;
+    color: var(--text-light);
+    font-size: 1rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.input-group input:focus {
+    border-color: var(--bg3);
+    outline: none;
+    box-shadow: 0 0 10px rgba(26, 174, 176, 0.8);
+}
+
+/* --- Actions (Forget Password & Button) --- */
+.actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.forgot-password {
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: color 0.3s;
+}
+
+.forgot-password:hover {
+    color: var(--bg3);
+    text-decoration: underline;
+}
+
+.login-button {
+    background: linear-gradient(90deg, var(--bg2), var(--bg3));
+    color: var(--text-light);
+    font-size: 1.2rem;
+    font-weight: 600;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 0 15px var(--bg3);
+    transition: transform 0.3s, box-shadow 0.3s;
+    letter-spacing: 2px;
+}
+
+.login-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px var(--bg3);
+}
+/* (All previous CSS remains the same) */
+/* ... */
+
+/* --- Actions (Forget Password & Button) --- */
+.actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+    margin-bottom: 20px; /* Added margin to separate from new link */
+}
+
+/* (Forgot Password and Login Button styling remain the same) */
+
+/* --- NEW Signup Prompt Styling --- */
+.signup-prompt {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 10px;
+    border-top: 1px dashed rgba(26, 174, 176, 0.2); /* Subtle separator */
+}
+
+.create-account-link {
+    color: var(--bg3);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s;
+}
+
+.create-account-link:hover {
+    color: #f7a62d; /* Dusky Orange hover for contrast */
+    text-decoration: underline;
+}
+
+/* (The rest of the CSS remains the same) */
+ /* --- Signup Page Specific Adjustments --- */
+/* Center the button on the signup page where there is no Forgot Password link */
+.center-actions {
+    justify-content: center !important;
+}
+
+.signup-button {
+    margin-top: 10px; /* Give a little extra space above the button */
+}
+/* --- Corrected Action/Link Styling --- */
+
+/* Primary Action: Holds the main Login Button */
+.primary-action {
+    margin-top: 30px;
+    margin-bottom: 15px; /* Space above the Forgot Password link */
+    text-align: center; /* Center the button */
+}
+
+.login-button {
+    background: linear-gradient(90deg, var(--bg2), var(--bg3));
+    color: var(--text-light);
+    font-size: 1.2rem;
+    font-weight: 600;
+    padding: 12px 50px; /* Wider button */
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 0 15px var(--bg3);
+    transition: transform 0.3s, box-shadow 0.3s;
+    letter-spacing: 2px;
+    display: inline-block; /* Essential for centering */
+}
+
+.login-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px var(--bg3);
+}
+
+/* Auxiliary Link (Forgot Password) */
+.auxiliary-link {
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s;
+    display: block; /* Makes the link take its own line */
+    text-align: center;
+    margin-bottom: 25px; /* Space before the signup prompt */
+}
+
+.auxiliary-link:hover {
+    color: var(--bg3);
+    text-decoration: underline;
+}
+
+/* --- Signup Prompt Styling (Reused) --- */
+.signup-prompt {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 10px;
+    border-top: 1px dashed rgba(26, 174, 176, 0.2); 
+}
+
+/* (Ensure all other CSS, including the glitch and input groups, remains the same.) */
+/* --- OTP Verification Specific Styling --- */
+.otp-input-group input {
+    text-align: center;
+    font-size: 1.5rem; /* Make the entered code larger */
+    letter-spacing: 5px;
+    max-width: 80%; /* Control width for better centering */
+    margin: 0 auto; /* Center the input field */
+}
