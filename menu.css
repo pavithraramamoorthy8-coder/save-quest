@@ -1,0 +1,238 @@
+/* --- Custom Colors (Inherited/Updated) --- */
+:root {
+    --bg1: #3b0f3e; /* deep purple */
+    --bg2: #8b1f5f, #1aaeb0; /* dusky pink */
+    --bg3: #1aaeb0; /* teal accent */
+    --text-light: #f0f0ff;
+    --card-bg-dark: rgba(27, 2, 34, 0.7);
+    --coin-gold: #FFD700;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Orbitron', sans-serif;
+    color: var(--text-light);
+}
+
+/* --- Global Body & Background Setup --- */
+body {
+    background: linear-gradient(135deg, var(--bg1) 0%, var(--bg2) 100%);
+    min-height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+/* --- EXISTING Background Ripple Effect (Z-index 0) --- */
+body::before { 
+    content: ''; position: absolute; top: 50%; left: 50%; width: 200vw; height: 200vh; background: radial-gradient(circle at center, rgba(26, 174, 176, 0.1), transparent); animation: ripple 10s infinite alternate; pointer-events: none; z-index: 0;
+}
+@keyframes ripple { from { transform: translate(-50%, -50%) scale(0.5); opacity: 0.5; } to { transform: translate(-50%, -50%) scale(1.5); opacity: 0.8; } }
+
+/* --- Deep-Sea Current/Nebula Flow (Z-index 0.5) --- */
+body::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle at 10% 90%, rgba(139, 31, 95, 0.1), transparent 50%),
+                radial-gradient(circle at 90% 10%, rgba(26, 174, 176, 0.15), transparent 60%);
+    animation: current-flow 40s linear infinite;
+    pointer-events: none;
+    z-index: 0.5;
+}
+@keyframes current-flow {
+    0% { transform: translateY(0); opacity: 1; }
+    50% { transform: translateY(-5%); opacity: 0.9; }
+    100% { transform: translateY(0); opacity: 1; }
+}
+
+/* --- Animated Space Elements (Z-Index 1+) --- */
+#space-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+.planet { position: absolute; border-radius: 50%; opacity: 0.2; filter: blur(15px); }
+#jupiter { width: 350px; height: 350px; background: radial-gradient(circle, #f7a62d 0%, #e63946 70%); top: 5%; left: -175px; animation: orbit-jupiter 60s linear infinite; }
+#moon { width: 200px; height: 200px; background: radial-gradient(circle, #c3c3c3 0%, #5d5d5d 70%); bottom: -100px; right: 5%; animation: orbit-moon 50s linear infinite reverse; }
+@keyframes orbit-jupiter { 0% { transform: translate(0, 0); } 100% { transform: translate(150vw, 50vh); } }
+@keyframes orbit-moon { 0% { transform: translate(0, 0); } 100% { transform: translate(-100vw, -80vh); } }
+.rocket-ship { position: absolute; top: 80%; left: 10%; width: 40px; height: 80px; background: rgba(255, 255, 255, 0.1); border-radius: 50% 50% 20% 20% / 30% 30% 70% 70%; opacity: 0.5; filter: blur(2px); animation: launch 30s linear infinite; z-index: 2; transform-origin: 50% 100%; }
+@keyframes launch { 0% { transform: translate(0, 0) rotate(-30deg); opacity: 0; } 5% { opacity: 0.5; } 100% { transform: translate(150vw, -150vh) rotate(-30deg); opacity: 0; } }
+
+
+/* --- Meteor Shower Animation (Z-index 1.5) --- */
+.meteor {
+    position: absolute; width: 2px; height: 100px; background: linear-gradient(to bottom, rgba(255, 255, 255, 0), var(--bg3) 100%);
+    opacity: 0; pointer-events: none; transform: rotate(45deg); animation: meteor-fall 10s linear infinite; z-index: 1.5; 
+}
+@keyframes meteor-fall {
+    0% { top: -100px; left: 0; opacity: 0; } 1% { opacity: 1; } 10% { top: 100%; left: 100%; opacity: 0; } 100% { top: 100%; left: 100%; opacity: 0; }
+}
+
+
+/* --- Network Model (Z-index 1.7) --- */
+#network-overlay {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1.7; pointer-events: none;
+}
+.network-dot {
+    position: absolute; width: 8px; height: 8px; border-radius: 50%; background: var(--text-light);
+    box-shadow: 0 0 5px var(--bg3); opacity: 0.6; animation: dot-pulse 4s infinite ease-in-out alternate;
+}
+@keyframes dot-pulse {
+    0% { transform: scale(1); opacity: 0.6; } 100% { transform: scale(1.5); opacity: 0.8; }
+}
+.network-line {
+    position: absolute; background: var(--bg3); opacity: 0.2; transform-origin: 0 0; height: 1px; animation: line-flicker 3s infinite;
+}
+@keyframes line-flicker {
+    0% { opacity: 0.1; } 50% { opacity: 0.3; } 100% { opacity: 0.1; }
+}
+
+
+/* --- Floating Transparent Icons (Z-index 1.8) --- */
+#icon-overlay {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1.8; pointer-events: none; overflow: hidden;
+}
+.floating-icon {
+    position: absolute; font-size: 2.5rem; color: var(--bg3); opacity: 0; filter: blur(1px);
+    text-shadow: 0 0 5px var(--bg3); animation-name: float-across; animation-timing-function: linear; animation-iteration-count: infinite;
+}
+@keyframes float-across {
+    0% { transform: translate(10vw, 10vh) rotate(0deg); opacity: 0; }
+    5% { opacity: 0.15; }
+    90% { opacity: 0.05; }
+    100% { transform: translate(90vw, 90vh) rotate(360deg); opacity: 0; }
+}
+
+
+/* ---------------- HEADER & CONTENT ---------------- */
+.content-wrapper { position: relative; z-index: 3; padding: 20px; max-width: 1400px; width: 95%; display: flex; flex-direction: column; height: 90vh; }
+.dashboard-header { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; margin-bottom: 30px; }
+.header-left { display: flex; align-items: center; gap: 20px; }
+.icon-btn { font-size: 1.8rem; color: var(--bg3); transition: transform 0.2s; text-shadow: 0 0 10px var(--bg3); }
+.icon-btn:hover { transform: rotate(30deg) scale(1.1); }
+
+/* Coin Counter */
+.coin-counter { background: var(--card-bg-dark); border: 2px solid var(--coin-gold); border-radius: 30px; padding: 8px 15px; display: flex; align-items: center; gap: 10px; box-shadow: 0 0 15px var(--coin-gold); }
+.coin-icon { color: var(--coin-gold); font-size: 1.4rem; animation: coin-spin 3s infinite linear; }
+@keyframes coin-spin { from { transform: rotateY(0deg); } to { transform: rotateY(360deg); } }
+#coin-value { font-size: 1.5rem; font-weight: 800; color: var(--coin-gold); text-shadow: 0 0 5px var(--coin-gold); }
+.coin-label { font-size: 0.7rem; font-weight: 400; opacity: 0.8; }
+
+/* Enhanced Profile Box (Gamer ID) */
+.header-right { display: flex; align-items: center; }
+.profile-box { 
+    background: var(--card-bg-dark); 
+    border: 2px solid var(--bg3); 
+    border-radius: 30px; 
+    padding: 5px 15px 5px 5px; 
+    display: flex; 
+    align-items: center; 
+    gap: 10px; 
+    box-shadow: 0 0 15px var(--bg3); 
+}
+.user-avatar { width: 40px; height: 40px; background: var(--bg2); border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 1.2rem; color: var(--text-light); border: 2px solid var(--text-light); }
+.user-id { font-size: 0.9rem; font-weight: 600; white-space: nowrap; }
+
+/* Title and Subtitle */
+.header-center { display: flex; flex-direction: column; align-items: center; }
+.blinking-title { font-size: 2.5rem; font-weight: 800; letter-spacing: 5px; position: relative; cursor: default; }
+
+/* DYNAMIC GLITCH TEXT ANIMATION */
+.glitch-text { 
+    color: var(--bg3); 
+    text-shadow: 0 0 10px var(--bg3), 0 0 20px rgba(26, 174, 176, 0.5); 
+    /* Apply the glitch animation */
+    animation-name: blink-text, glitch;
+    animation-duration: 1.5s, 0.5s; /* Glitch should be faster */
+    animation-timing-function: step-start, linear;
+    animation-iteration-count: infinite, infinite;
+}
+@keyframes blink-text { 50% { opacity: 0.7; } }
+/* New keyframe for the visual title distortion */
+@keyframes glitch { 
+    0% { clip: rect(24px, 9999px, 80px, 0); transform: skew(0.5deg); } 
+    25% { clip: rect(10px, 9999px, 50px, 0); transform: skew(-1deg); } 
+    50% { clip: rect(100px, 9999px, 30px, 0); transform: skew(-0.5deg); } 
+    75% { clip: rect(40px, 9999px, 90px, 0); transform: skew(1deg); } 
+    100% { clip: rect(70px, 9999px, 50px, 0); transform: skew(0.5deg); } 
+}
+
+
+.subtitle { font-size: 1rem; color: #FFD700; margin-top: 5px; text-shadow: 0 0 10px rgba(255, 215, 0, 0.5); animation: fade-pulse 3s infinite alternate; }
+@keyframes fade-pulse { from { opacity: 0.5; } to { opacity: 1; } }
+
+
+/* ---------------- MENU CARDS (MOVEMENT & STAGGERED ENTRY SETUP) ---------------- */
+.menu-section { display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(2, 1fr); gap: 50px; flex-grow: 1; padding: 40px 0; position: relative; width: 100%; margin: 0 auto; }
+
+/* ALIGNMENT LOGIC */
+.menu-1 { justify-self: start; align-self: start; }
+.menu-2 { justify-self: center; align-self: end; } 
+.menu-3 { justify-self: end; align-self: start; }
+.menu-4 { justify-self: start; align-self: end; } 
+.menu-5 { justify-self: center; align-self: start; } 
+.menu-6 { justify-self: end; align-self: end; } 
+
+.menu-card {
+    text-decoration: none; width: 200px; height: 200px; border-radius: 50%; background: var(--card-bg-dark); 
+    border: 4px solid var(--card-color); transition: transform 0.3s, box-shadow 0.3s; position: relative; 
+    box-shadow: 0 0 10px var(--card-color); z-index: 4; display: flex; justify-content: center; align-items: center;
+
+    /* Initial state for Staggered Entry: Hidden and small */
+    opacity: 0;
+    transform: scale(0.1); 
+    
+    /* Subtle Floating & Glow animation */
+    animation-name: wave-motion, menu-glow; 
+    animation-duration: 6s, 2s; 
+    animation-iteration-count: infinite, infinite;
+    animation-timing-function: ease-in-out, ease-in-out; 
+    animation-direction: alternate, alternate;
+}
+
+/* 1. KEYFRAME FOR STAGGERED ENTRY (Applied by JS) */
+@keyframes card-entry {
+    0% { opacity: 0; transform: scale(0.1) translateY(50px); }
+    100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* 2. ENHANCED SUBTLE FLOAT MOVEMENT */
+@keyframes wave-motion {
+    0% { transform: translate(0, 0) scale(1) rotate(0deg); } 
+    33% { transform: translate(20px, -30px) scale(1.02) rotate(1deg); } 
+    66% { transform: translate(-20px, -10px) scale(0.98) rotate(-1deg); } 
+    100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+}
+
+/* 3. ENHANCED GLOW KEYFRAMES */
+@keyframes menu-glow {
+    0% { box-shadow: 0 0 10px var(--card-color); }
+    100% { box-shadow: 0 0 40px var(--card-color), 0 0 10px rgba(255, 255, 255, 0.5); }
+}
+
+.menu-card:hover { 
+    transform: scale(1.15) rotate(0deg); 
+    box-shadow: 0 0 50px var(--card-color), 0 0 80px rgba(255, 255, 255, 0.2); 
+    z-index: 10; 
+    animation-play-state: paused; 
+}
+
+.card-content { 
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 5px; padding: 10px; text-align: center;
+}
+.menu-card i { font-size: 2.5rem; color: var(--card-color); }
+.menu-card h2 { font-size: 1.1rem; font-weight: 600; margin: 0; color: var(--card-color); text-shadow: 0 0 5px var(--card-color); }
+
+/* Daily Rewards card content specifics */
+.reward-amount { font-size: 0.8rem; font-weight: 800; color: var(--coin-gold); }
+.reward-coin-icon { font-size: 0.9rem !important; color: var(--coin-gold) !important; }
+
+/* --- Ripple/Click Animation --- */
+.ripple-effect {
+    position: absolute; width: 20px; height: 20px; background: radial-gradient(circle, rgba(26, 174, 176, 0.8) 0%, rgba(26, 174, 176, 0.0) 70%); 
+    border-radius: 50%; transform: scale(0); pointer-events: none; z-index: 5; animation: ripple-grow 1s ease-out; filter: drop-shadow(0 0 10px var(--bg3));
+}
+@keyframes ripple-grow { to { transform: scale(50); opacity: 0; } }
