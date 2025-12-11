@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Treasure Tide - Main Menu</title>
+    
+    <link rel="stylesheet" href="menu.css"> 
+    
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div id="space-bg">
+        <div class="planet" id="jupiter"></div>
+        <div class="planet" id="moon"></div>
+        <div class="rocket-ship">
+            <div class="thruster"></div>
+        </div>
+        
+        <div id="star-background"></div> 
+        <div id="network-overlay"></div>    <div id="icon-overlay"></div>       </div>
+
+    <div class="content-wrapper">
+        <header class="dashboard-header">
+            <div class="header-left">
+                <a href="#" class="icon-btn settings-btn" title="Settings">
+                    <i class="fas fa-cog"></i>
+                </a>
+                <div class="coin-counter" id="coin-counter-display">
+                    <i class="fas fa-coins coin-icon"></i>
+                    <span id="coin-value">500</span>
+                    <span class="coin-label">T-Coins</span>
+                </div>
+            </div>
+
+            <div class="header-center">
+                <div class="new-special-logo">
+                    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="50" cy="50" r="40" stroke="var(--bg3)" stroke-width="4" fill="transparent" opacity="0.8"/>
+                        <path d="M20 50 C30 30, 70 30, 80 50 C70 70, 30 70, 20 50 Z" fill="url(#logoGradient)"/>
+                        <defs>
+                            <linearGradient id="logoGradient" x1="0" y1="0" x2="1" y2="1">
+                                <stop offset="0%" stop-color="#FFD700"/>
+                                <stop offset="100%" stop-color="#E63946"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <h1 class="blinking-title glitch-text" data-text="TREASURE TIDE">TREASURE TIDE</h1>
+                <p class="subtitle">Launch Your Financial Destiny</p>
+            </div>
+
+            <div class="header-right">
+                <div class="profile-box profile-glow">
+                    <div class="user-avatar">
+                        <i class="fas fa-user-astronaut"></i>
+                    </div>
+                    <span class="user-id">CaptainAether#42</span>
+                </div>
+            </div>
+        </header>
+
+        <main class="menu-section">
+            
+            <a href="games.html" class="menu-card menu-1" style="--card-color: #FFD700;">
+                <div class="card-content">
+                    <i class="fas fa-gamepad"></i>
+                    <h2>Games</h2>
+                </div>
+            </a>
+            
+            <a href="quiz.html" class="menu-card menu-2" style="--card-color: #E63946;">
+                <div class="card-content">
+                    <i class="fas fa-brain"></i>
+                    <h2>Quiz</h2>
+                </div>
+            </a>
+            
+            <a href="literacy.html" class="menu-card menu-3" style="--card-color: var(--bg3);">
+                <div class="card-content">
+                    <i class="fas fa-book-open"></i>
+                    <h2>Education Literacy</h2>
+                </div>
+            </a>
+            
+            <a href="rewards.html" class="menu-card menu-4" style="--card-color: #f7a62d;">
+                <div class="card-content">
+                    <i class="fas fa-trophy"></i>
+                    <p class="reward-amount">+100</p>
+                    <i class="fas fa-coins reward-coin-icon"></i>
+                    <h2>Daily Rewards</h2>
+                </div>
+            </a>
+            
+            <a href="about.html" class="menu-card menu-5" style="--card-color: #FF69B4;">
+                <div class="card-content">
+                    <i class="fas fa-info-circle"></i>
+                    <h2>About Us</h2>
+                </div>
+            </a>
+            
+            <a href="how-to-play.html" class="menu-card menu-6" style="--card-color: #ff69b5;">
+                <div class="card-content">
+                    <i class="fas fa-question-circle"></i>
+                    <h2>How To Play</h2>
+                </div>
+            </a>
+        </main>
+    </div>
+
+    <script src="menu.js"></script>
+
+</body>
+</html>
