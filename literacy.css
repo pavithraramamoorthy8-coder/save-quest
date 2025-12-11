@@ -1,0 +1,221 @@
+/* --- Custom Colors (Inherited/Updated) --- */
+:root {
+    --bg1: #3b0f3e; /* deep purple */
+    --bg2: #8b1f5f,#1aaeb0; /* dusky pink */
+    --bg3: #1aaeb0; /* teal accent */
+    --text-light: #f0f0ff;
+    --card-bg-dark: rgba(27, 2, 34, 0.7);
+    --coin-gold: #FFD700;
+
+    /* Rainbow Gradient for Title */
+    --rainbow-gradient: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Orbitron', sans-serif;
+    color: var(--text-light);
+}
+
+/* --- Global Body & Background Setup --- */
+body {
+    background: linear-gradient(135deg, var(--bg1) 0%, var(--bg2) 100%);
+    min-height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+/* Subtle background ripple animation */
+body::before { content: ''; position: absolute; top: 50%; left: 50%; width: 200vw; height: 200vh; background: radial-gradient(circle at center, rgba(26, 174, 176, 0.1), transparent); animation: ripple 10s infinite alternate; pointer-events: none; z-index: 0; }
+@keyframes ripple { from { transform: translate(-50%, -50%) scale(0.5); opacity: 0.5; } to { transform: translate(-50%, -50%) scale(1.5); opacity: 0.8; } }
+
+/* --- Animated Space Elements --- */
+#space-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+/* Star styles will be injected by literacy.js */
+
+
+/* ---------------- HEADER & CONTENT ---------------- */
+.content-wrapper { position: relative; z-index: 3; padding: 20px; max-width: 1200px; width: 95%; display: flex; flex-direction: column; height: 90vh; }
+.dashboard-header { display: flex; justify-content: flex-start; align-items: center; padding: 15px 0; margin-bottom: 30px; }
+.header-left { margin-right: 50px; }
+.icon-btn { font-size: 1.8rem; color: var(--bg3); transition: transform 0.2s; text-shadow: 0 0 10px var(--bg3); }
+.icon-btn:hover { transform: scale(1.1); }
+
+/* Title and Subtitle */
+.header-center { display: flex; flex-direction: column; align-items: flex-start; }
+.blinking-title { font-size: 2.5rem; font-weight: 800; letter-spacing: 5px; color: var(--bg3); text-shadow: 0 0 10px var(--bg3); cursor: default; }
+
+/* Arena Rainbow Title */
+.arena-title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-top: 5px;
+    letter-spacing: 3px;
+    
+    background: var(--rainbow-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    
+    animation: rainbow-shift 5s linear infinite, 
+               blink-fade 1s step-start infinite;
+}
+@keyframes blink-fade { 
+    50% { opacity: 0.3; } 
+}
+@keyframes rainbow-shift {
+    to { background-position: 500% 0; }
+}
+
+
+/* ---------------- GAME CARDS (2x2 Grid) ---------------- */
+.game-section { 
+    display: grid; 
+    grid-template-columns: repeat(2, 1fr); 
+    grid-template-rows: repeat(2, 1fr); 
+    gap: 40px; 
+    flex-grow: 1; 
+    padding: 20px 0; 
+    justify-items: center;
+    align-items: center;
+}
+
+.game-card {
+    text-decoration: none;
+    width: 90%; 
+    max-width: 500px;
+    height: 90%;
+    min-height: 200px;
+    background: var(--card-bg-dark);
+    /* REMOVED STATIC BORDER: border: 3px solid var(--card-color); */
+    border-radius: 20px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Important for inner border animation */
+    overflow: hidden; 
+    transition: transform 0.3s, box-shadow 0.3s;
+    /* Base glow shadow */
+    box-shadow: 0 0 10px var(--card-color);
+}
+
+/* ------------------- DYNAMIC ANIMATED BORDER ------------------- */
+/* The element that creates the rotating colored background */
+.game-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(transparent, var(--card-color), transparent 30%);
+    z-index: 2;
+    animation: border-rotate 4s linear infinite;
+    opacity: 0.7;
+}
+
+/* The element that creates the solid colored background fill */
+.game-card::after {
+    content: '';
+    position: absolute;
+    inset: 5px; /* Creates the border width */
+    background: var(--card-bg-dark);
+    border-radius: 15px;
+    z-index: 3; /* Must be higher than ::before but lower than content */
+}
+
+@keyframes border-rotate {
+    to { transform: rotate(360deg); }
+}
+/* ------------------------------------------------------------- */
+
+
+/* Card Hover Styles (Triggers increased shadow) */
+.game-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 40px var(--card-color), 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+
+.card-content {
+    /* Must be higher than ::after (z-index: 3) to be visible */
+    z-index: 4; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+}
+
+.card-content i {
+    font-size: 3.5rem;
+    margin-bottom: 15px;
+    color: var(--card-color);
+    text-shadow: 0 0 10px var(--card-color);
+}
+
+.card-content h3 {
+    font-size: 1.8rem;
+    color: var(--card-color);
+    margin-bottom: 5px;
+}
+
+.card-content p {
+    font-size: 0.9rem;
+    opacity: 0.7;
+    margin-bottom: 10px;
+}
+
+/* Status Tag Pulse Animation */
+.status-tag {
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 5px 15px;
+    border-radius: 15px;
+    text-transform: uppercase;
+    animation: pulse-border 1.5s infinite alternate; 
+    z-index: 4;
+}
+.status-tag.active, .status-tag.essential {
+    background: rgba(0, 255, 0, 0.2);
+    color: #00FF00;
+    border: 1px solid #00FF00;
+}
+.status-tag.coming-soon {
+    background: rgba(255, 215, 0, 0.2);
+    color: #FFD700;
+    border: 1px solid #FFD700;
+    animation: none; 
+}
+
+@keyframes pulse-border {
+    from {
+        box-shadow: 0 0 5px #00FF00;
+        transform: scale(1);
+    }
+    to {
+        box-shadow: 0 0 15px #00FF00;
+        transform: scale(1.02);
+    }
+}
+
+/* Click Effect Classes (Used by literacy.js) */
+@keyframes energy-burst {
+    0% { transform: scale(1); opacity: 0.8; }
+    100% { transform: scale(3); opacity: 0; }
+}
+
+.energy-burst-effect {
+    position: absolute;
+    inset: 0; 
+    border-radius: 20px;
+    background: radial-gradient(circle at center, var(--card-color) 0%, transparent 70%);
+    opacity: 0;
+    z-index: 10;
+    pointer-events: none;
+}
