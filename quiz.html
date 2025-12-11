@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Treasure Tide - Financial Quiz</title>
+    
+    <link rel="stylesheet" href="quiz.css"> 
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div id="space-bg">
+        <div id="icon-overlay"></div>
+        <div id="star-background"></div> 
+    </div>
+
+    <div class="content-wrapper">
+        <header class="dashboard-header">
+            <div class="header-left">
+                <a href="menu.html" class="icon-btn back-btn" title="Back to Main Menu">
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+            </div>
+
+            <div class="header-center">
+                <h1 class="blinking-title glitch-text" data-text="TREASURE TIDE">TREASURE TIDE</h1>
+                <h2 class="quiz-subtitle">Test Your Financial Velocity</h2>
+            </div>
+            
+             <div class="header-right">
+                </div>
+        </header>
+
+        <main class="quiz-container">
+            <section id="quiz-lobby" class="quiz-screen active">
+                <div class="lobby-box">
+                    <div class="quote-icon"><i class="fas fa-rocket"></i></div>
+                    <h3>Launch Protocol Initiated</h3>
+                    <p class="motivation-quote">"The best investment you can make is in yourself. Start testing your knowledge now!"</p>
+                    <button id="start-quiz-btn" class="action-btn start-btn">Start Quiz</button>
+                    <p class="quiz-info">5 Questions | Beginner Level</p>
+                </div>
+            </section>
+            
+            <section id="quiz-question-screen" class="quiz-screen">
+                <div id="question-area">
+                    </div>
+                <div class="progress-bar-container">
+                    <div id="progress-bar-fill"></div>
+                </div>
+            </section>
+            
+            <section id="quiz-results" class="quiz-screen">
+                <div class="results-box">
+                    <h3 id="results-title"></h3>
+                    <p id="results-score"></p>
+                    <p id="results-message"></p>
+                    <button id="review-quiz-btn" class="action-btn review-btn"><i class="fas fa-eye"></i> Review Answers</button>
+                    <button id="restart-quiz-btn" class="action-btn restart-btn"><i class="fas fa-redo"></i> Restart Quiz</button>
+                    <a href="menu.html" class="action-btn exit-btn"><i class="fas fa-home"></i> Back to Menu</a>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script src="quiz.js"></script>
+
+</body>
+</html>
