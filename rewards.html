@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Loot Drop - Simplified Timer</title>
+    
+    <link rel="stylesheet" href="rewards.css"> 
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div id="space-bg"></div> 
+
+    <div class="content-wrapper">
+        <header class="dashboard-header">
+            <div class="header-left">
+                <a href="menu.html" class="icon-btn back-btn" title="Back to Main Hub">
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+            </div>
+
+            <div class="header-center">
+                <h1 class="blinking-title glitch-text" data-text="LOOT VAULT">LOOT VAULT</h1>
+                <h2 class="module-subtitle">Simple 24-Hour Reward Timer</h2>
+            </div>
+            
+             <div class="header-right">
+                <div id="coin-counter-display" class="coin-display">
+                    <i class="fas fa-coins"></i> 
+                    <span id="current-coins">0</span>
+                </div>
+            </div>
+        </header>
+
+        <main class="module-container">
+            
+            <section class="reward-section">
+                <div class="main-reward-box">
+                    <div class="icon-area">
+                        <i id="main-icon" class="fas fa-gem"></i> 
+                    </div>
+                    
+                    <h3 class="box-heading">DAILY REWARD CHEST</h3>
+                    
+                    <p id="claim-message" class="message-text">
+                        "Your future is built on the gold you don't spend." — Unknown Master
+                    </p>
+                    
+                    <div id="countdown-display" class="countdown-timer" style="display:none;">
+                        Time until next drop: <span id="timer-text"></span>
+                    </div>
+
+                    <button id="claim-btn" class="claim-button">
+                        <i class="fas fa-bolt"></i> CLAIM 100 COINS
+                    </button>
+                </div>
+                
+                <div class="simple-streak">
+                    Current Streak: <span id="streak-counter">0</span> Days <i class="fas fa-fire-alt"></i>
+                </div>
+
+            </section>
+
+        </main>
+    </div>
+
+    <script src="rewards.js"></script>
+
+</body>
+</html>
