@@ -1,0 +1,204 @@
+/* --- Custom Colors --- */
+:root {
+    --bg1: #3b0f3e; /* deep purple */
+    --bg2: #8b1f5f,#1aaeb0; /* dusky pink */
+    --bg3: #1aaeb0; /* teal accent for back button */
+    --text-light: #f0f0ff;
+    --card-bg-dark: rgba(27, 2, 34, 0.95);
+    
+    /* MODULE THEME COLOR: GOLD/YELLOW (Rewards) */
+    --theme-color: #00eaff; 
+    
+    --claimed-color: #bb00ff; 
+    --missed-color: #EE4444; 
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Orbitron', sans-serif;
+    color: var(--text-light);
+}
+
+/* --- Global Body & Background Setup --- */
+body {
+    background: linear-gradient(135deg, var(--bg1) 0%, var(--bg2) 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+#space-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+
+/* ---------------- HEADER & CONTENT ---------------- */
+.content-wrapper { position: relative; z-index: 3; padding: 20px; max-width: 900px; width: 95%; display: flex; flex-direction: column; height: 95vh; }
+.dashboard-header { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; margin-bottom: 20px; }
+.header-left { margin-right: auto; }
+
+/* Teal Back Button */
+.icon-btn { font-size: 1.8rem; color: var(--bg3); transition: transform 0.2s; text-shadow: 0 0 10px var(--bg3); }
+.icon-btn:hover { transform: scale(1.1); }
+
+.header-center { text-align: center; position: absolute; left: 50%; transform: translateX(-50%); }
+.blinking-title { 
+    font-size: 2.8rem; 
+    font-weight: 800; 
+    letter-spacing: 5px; 
+    color: var(--theme-color); 
+    text-shadow: 0 0 15px var(--theme-color), 0 0 5px #000; 
+    cursor: default; 
+}
+.module-subtitle { font-size: 1rem; color: var(--bg3); margin-top: 5px; text-shadow: 0 0 5px rgba(26, 174, 176, 0.5); }
+
+
+/* ---------------- Coin Counter Display Style ---------------- */
+.coin-display {
+    display: flex;
+    align-items: center;
+    padding: 8px 15px;
+    background: rgba(255, 195, 0, 0.3);
+    border: 2px solid var(--theme-color);
+    border-radius: 5px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-shadow: 0 0 8px var(--theme-color);
+}
+.coin-display i {
+    color: var(--theme-color); 
+    margin-right: 8px;
+}
+#current-coins {
+    color: var(--text-light); 
+}
+
+/* ---------------- MODULE CONTAINER ---------------- */
+.module-container {
+    flex-grow: 1;
+    background: var(--card-bg-dark); 
+    border: 3px solid var(--theme-color);
+    border-radius: 15px;
+    box-shadow: 0 0 30px #1aaeb0(25, 148, 148, 0.8);
+    display: flex;
+    justify-content: center; /* Center content vertically */
+    align-items: center; /* Center content horizontally */
+    padding: 30px;
+}
+
+.reward-section {
+    width: 100%;
+    max-width: 600px; /* Limit the size of the main content */
+    text-align: center;
+}
+
+/* --- Main Reward Box --- */
+.main-reward-box {
+    padding: 40px;
+    background: rgba(255, 195, 0, 0.1);
+    border: 2px solid var(--theme-color);
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(255, 0, 179, 0.4);
+    margin-bottom: 30px;
+}
+
+.icon-area {
+    margin-bottom: 20px;
+}
+#main-icon {
+    font-size: 4rem;
+    color: var(--theme-color);
+    text-shadow: 0 0 15px var(--theme-color);
+    animation: bounce 2s infinite ease-in-out;
+}
+
+.box-heading {
+    font-size: 2rem;
+    color: var(--theme-color);
+    margin-bottom: 15px;
+    text-shadow: 0 0 10px var(--theme-color);
+}
+
+.message-text {
+    margin: 25px 0;
+    font-style: italic;
+    color: var(--text-light);
+    font-size: 1.1rem;
+    min-height: 40px; /* Ensure space for the claimed message */
+}
+
+/* --- Countdown Timer --- */
+.countdown-timer {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text-light);
+    margin-bottom: 25px;
+}
+#timer-text {
+    color: var(--claimed-color);
+    text-shadow: 0 0 5px var(--claimed-color);
+}
+
+/* --- Claim Button --- */
+.claim-button {
+    padding: 18px 35px;
+    background: var(--theme-color);
+    color: var(--bg1); 
+    border: 3px solid #FFF;
+    border-radius: 10px;
+    font-size: 1.3rem;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: 0 8px 25px rgba(255, 195, 0, 0.8);
+    text-transform: uppercase;
+    transition: all 0.2s ease-in-out;
+}
+.claim-button:hover:not(:disabled) {
+    background: #FFD700; 
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 12px 30px rgba(255, 195, 0, 1);
+    animation: button-glow 1.5s infinite alternate;
+}
+.claim-button:disabled {
+    background: #555;
+    cursor: not-allowed;
+    box-shadow: none;
+    color: #AAA;
+    border-color: #555;
+}
+.claim-button i {
+    color: var(--bg1);
+    margin-right: 10px;
+    font-size: 1.5rem;
+}
+
+/* --- Simple Streak --- */
+.simple-streak {
+    font-size: 1rem;
+    color: var(--text-light);
+    margin-top: 15px;
+}
+.simple-streak #streak-counter {
+    color: var(--theme-color);
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+.simple-streak i {
+    color: var(--theme-color);
+}
+
+
+/* --- Animations --- */
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+@keyframes button-glow {
+    0% { box-shadow: 0 8px 25px rgba(255, 195, 0, 0.8); }
+    100% { box-shadow: 0 8px 25px rgba(255, 255, 0, 1); }
+}
+@keyframes twinkle { 
+    0% { transform: scale(1); opacity: 0.3; } 
+    50% { transform: scale(1.5); opacity: 0.9; } 
+    100% { transform: scale(1); opacity: 0.4; } 
+}
