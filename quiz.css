@@ -1,0 +1,297 @@
+/* --- Custom Colors --- */
+:root {
+    --bg1: #3b0f3e; /* deep purple */
+    --bg2: #8b1f5f, #1aaeb0; /* dusky pink */
+    --text-light: #f0f0ff;
+    --card-bg-dark: rgba(27, 2, 34, 0.9);
+    
+    /* ORIGINAL COLORS (Teal/Gold) */
+    --bg3: #1aaeb0; /* Teal Accent (Used for Main Title/Glow) */
+    --primary-action: #FFD700; /* Gold/Yellow (Used for Subtitle/Secondary Action) */
+    
+    /* NEW QUIZ COLORS (Pink Theme from Loot Labyrinth) */
+    --primary-accent: #FF69B4; /* Pink (Used for Box Border/Start Button) */
+    --secondary-accent: #E63946; /* Error Red */
+    --success-color: #00FF00;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Orbitron', sans-serif;
+    color: var(--text-light);
+}
+
+/* --- Global Body & Background Setup --- */
+body {
+    background: linear-gradient(135deg, var(--bg1) 0%, var(--bg2) 100%);
+    min-height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+#space-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+#icon-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; pointer-events: none; }
+
+/* Animated Star Shining Effect */
+.star {
+    position: absolute;
+    background: #fff;
+    border-radius: 50%;
+    /* Styles are mostly applied via JS, but keyframes must be here */
+}
+@keyframes twinkle { 
+    0% { transform: scale(1); opacity: 0.3; } 
+    50% { transform: scale(1.5); opacity: 0.9; } 
+    100% { transform: scale(1); opacity: 0.4; } 
+}
+
+/* Floating Books Animation */
+.floating-book {
+    position: absolute;
+    font-size: 2rem;
+    color: var(--primary-accent);
+    opacity: 0;
+    filter: blur(1px);
+    text-shadow: 0 0 5px var(--primary-accent);
+    animation-name: float-across;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+@keyframes float-across {
+    0% { transform: translate(-10vw, 10vh) rotate(0deg); opacity: 0; }
+    5% { opacity: 0.15; }
+    90% { opacity: 0.05; }
+    100% { transform: translate(110vw, 90vh) rotate(360deg); opacity: 0; }
+}
+
+
+/* ---------------- HEADER & CONTENT ---------------- */
+.content-wrapper { position: relative; z-index: 3; padding: 20px; max-width: 1000px; width: 90%; display: flex; flex-direction: column; height: 90vh; }
+.dashboard-header { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; margin-bottom: 30px; }
+.header-left { margin-right: auto; }
+.header-center { position: absolute; left: 50%; transform: translateX(-50%); text-align: center; }
+
+/* Back Button (Teal) */
+.icon-btn { 
+    font-size: 1.8rem; 
+    color: var(--bg3); /* Teal */
+    transition: transform 0.2s; 
+    text-shadow: 0 0 10px var(--bg3); 
+}
+.icon-btn:hover { transform: scale(1.1); }
+
+/* Title and Subtitle */
+.blinking-title { 
+    font-size: 2.5rem; 
+    font-weight: 800; 
+    letter-spacing: 5px; 
+    color: var(--bg3); /* Teal */
+    text-shadow: 0 0 10px var(--bg3); 
+    cursor: default; 
+}
+.quiz-subtitle { 
+    font-size: 1rem; 
+    color: var(--primary-action); /* Gold/Yellow */
+    margin-top: 5px; 
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5); 
+}
+
+
+/* ---------------- QUIZ SCREENS (PINK BOX GLOW) ---------------- */
+.quiz-container {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    position: relative;
+}
+
+.quiz-screen {
+    width: 100%;
+    max-width: 700px;
+    height: 100%;
+    max-height: 500px;
+    background: var(--card-bg-dark);
+    /* Pink Border */
+    border: 3px solid var(--primary-accent);
+    border-radius: 15px;
+    padding: 30px;
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    position: relative; 
+    overflow: hidden;
+
+    /* Base Shadow and Hover Animation */
+    box-shadow: 0 0 15px var(--primary-accent);
+    transition: transform 0.3s, box-shadow 0.3s;
+    animation: quiz-float 4s infinite alternate ease-in-out; 
+}
+.quiz-screen.active { display: flex; }
+
+@keyframes quiz-float {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-5px); }
+}
+
+.quiz-screen:hover {
+    transform: translateY(-5px) scale(1.01);
+    box-shadow: 0 0 40px var(--primary-accent), 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+/* Dynamic Inner Border Effect (Glow Sweep - Pink) */
+.quiz-screen::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(transparent, rgba(255, 105, 180, 0.4), transparent 30%); 
+    opacity: 0; 
+    z-index: 1;
+    transition: opacity 0.3s;
+}
+
+.quiz-screen:hover::after {
+    opacity: 1; 
+    animation: glow-sweep 3s linear infinite; 
+}
+
+@keyframes glow-sweep {
+    to { transform: rotate(360deg); }
+}
+
+/* --- Lobby Box Styles --- */
+.lobby-box { text-align: center; padding: 20px; z-index: 2; }
+.quote-icon {
+    font-size: 4rem;
+    color: var(--primary-accent); /* Pink Icon */
+    margin-bottom: 20px;
+    animation: icon-float 3s infinite alternate ease-in-out;
+}
+@keyframes icon-float {
+    from { transform: translateY(-5px); }
+    to { transform: translateY(5px); }
+}
+
+.lobby-box h3 { font-size: 2rem; margin-bottom: 10px; color: var(--text-light); }
+.motivation-quote {
+    font-size: 1.1rem;
+    color: var(--primary-accent); /* Pink Quote text */
+    margin-bottom: 30px;
+    font-style: italic;
+    opacity: 0.9;
+}
+.quiz-info {
+    margin-top: 20px;
+    font-size: 0.9rem;
+    opacity: 0.6;
+}
+
+/* --- Action Button Styling (Start, Restart, Exit) --- */
+.action-btn {
+    padding: 12px 30px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s, box-shadow 0.3s;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+.start-btn, .restart-btn {
+    background: var(--primary-accent); /* Pink button */
+    color: var(--bg1);
+    box-shadow: 0 0 15px var(--primary-accent);
+}
+.start-btn:hover, .restart-btn:hover {
+    transform: scale(1.05);
+    background: #FFB3D9;
+}
+.review-btn, .exit-btn {
+    background: var(--secondary-accent);
+    color: var(--text-light);
+    box-shadow: 0 0 10px var(--secondary-accent);
+    margin-top: 15px;
+}
+.review-btn:hover, .exit-btn:hover {
+    transform: scale(1.05);
+    background: #e76672;
+}
+
+/* --- Question Area Styles --- */
+#question-area { width: 100%; flex-grow: 1; display: flex; flex-direction: column; justify-content: center; z-index: 2; }
+#question-text { font-size: 1.5rem; font-weight: 600; margin-bottom: 30px; text-align: center; color: var(--text-light); }
+.options-container { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.option-btn {
+    padding: 15px 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s, transform 0.1s;
+    font-size: 1rem;
+    word-wrap: break-word;
+    white-space: normal;
+}
+.option-btn:hover:not(.disabled) {
+    background: rgba(255, 105, 180, 0.3); /* Pink Hover */
+    border-color: var(--primary-accent);
+    transform: translateY(-2px);
+}
+
+/* --- State Styles (Feedback) --- */
+.option-btn.correct {
+    background: var(--success-color);
+    border-color: var(--success-color);
+    color: var(--bg1);
+    box-shadow: 0 0 10px var(--success-color);
+    animation: pulse-correct 0.5s 2;
+}
+.option-btn.incorrect {
+    background: var(--secondary-accent); /* Red */
+    border-color: var(--secondary-accent);
+    color: var(--text-light);
+    box-shadow: 0 0 10px var(--secondary-accent);
+}
+.option-btn.disabled {
+    cursor: default;
+    opacity: 0.6;
+}
+
+@keyframes pulse-correct {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.03); }
+    100% { transform: scale(1); }
+}
+
+/* --- Progress Bar --- */
+.progress-bar-container { width: 100%; height: 10px; background: rgba(255, 255, 255, 0.1); border-radius: 5px; margin-top: 20px; overflow: hidden; z-index: 2; }
+#progress-bar-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--secondary-accent), var(--primary-accent)); /* Red to Pink gradient */
+    transition: width 0.5s ease-in-out;
+}
+
+/* --- Results Screen --- */
+.results-box { text-align: center; padding: 40px; z-index: 2; }
+#results-title {
+    font-size: 3rem;
+    color: var(--primary-accent); /* Pink */
+    margin-bottom: 20px;
+    text-shadow: 0 0 20px var(--primary-accent);
+}
+#results-score { font-size: 1.5rem; font-weight: 600; margin-bottom: 15px; }
+#results-message { font-size: 1.1rem; color: var(--primary-accent); margin-bottom: 30px; }
