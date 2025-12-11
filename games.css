@@ -1,0 +1,217 @@
+/* --- Custom Colors (Inherited/Updated) --- */
+:root {
+    --bg1: #3b0f3e; /* deep purple */
+    --bg2: #8b1f5f, #1aaeb0; /* dusky pink */
+    --bg3: #1aaeb0; /* teal accent */
+    --text-light: #f0f0ff;
+    --card-bg-dark: rgba(27, 2, 34, 0.7);
+    --coin-gold: #FFD700;
+
+    /* Rainbow Gradient for Title */
+    --rainbow-gradient: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Orbitron', sans-serif;
+    color: var(--text-light);
+}
+
+/* --- Global Body & Background Setup --- */
+body {
+    background: linear-gradient(135deg, var(--bg1) 0%, var(--bg2) 100%);
+    min-height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+body::before { content: ''; position: absolute; top: 50%; left: 50%; width: 200vw; height: 200vh; background: radial-gradient(circle at center, rgba(26, 174, 176, 0.1), transparent); animation: ripple 10s infinite alternate; pointer-events: none; z-index: 0; }
+@keyframes ripple { from { transform: translate(-50%, -50%) scale(0.5); opacity: 0.5; } to { transform: translate(-50%, -50%) scale(1.5); opacity: 0.8; } }
+
+
+/* --- Animated Space Elements --- */
+#space-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+/* Star styles will be injected by games.js */
+
+
+/* ---------------- HEADER & CONTENT ---------------- */
+.content-wrapper { position: relative; z-index: 3; padding: 20px; max-width: 1200px; width: 95%; display: flex; flex-direction: column; height: 90vh; }
+.dashboard-header { display: flex; justify-content: flex-start; align-items: center; padding: 15px 0; margin-bottom: 30px; }
+.header-left { margin-right: 50px; }
+.icon-btn { font-size: 1.8rem; color: var(--bg3); transition: transform 0.2s; text-shadow: 0 0 10px var(--bg3); }
+.icon-btn:hover { transform: scale(1.1); }
+
+/* Title and Subtitle */
+.header-center { display: flex; flex-direction: column; align-items: flex-start; }
+.blinking-title { font-size: 2.5rem; font-weight: 800; letter-spacing: 5px; color: var(--bg3); text-shadow: 0 0 10px var(--bg3); cursor: default; }
+
+/* Game Arena Rainbow Title */
+.game-arena-title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-top: 5px;
+    letter-spacing: 3px;
+    
+    background: var(--rainbow-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    
+    animation: rainbow-shift 5s linear infinite, 
+               blink-fade 1s step-start infinite;
+}
+@keyframes blink-fade { 
+    50% { opacity: 0.3; } 
+}
+@keyframes rainbow-shift {
+    to { background-position: 500% 0; }
+}
+
+
+/* ---------------- GAME CARDS (2x2 Grid) ---------------- */
+.game-section { 
+    display: grid; 
+    grid-template-columns: repeat(2, 1fr); 
+    grid-template-rows: repeat(2, 1fr); 
+    gap: 40px; 
+    flex-grow: 1; 
+    padding: 20px 0; 
+    justify-items: center;
+    align-items: center;
+}
+
+.game-card {
+    text-decoration: none;
+    width: 90%; 
+    max-width: 500px;
+    height: 90%;
+    min-height: 200px;
+    background: var(--card-bg-dark);
+    border: 3px solid var(--card-color);
+    border-radius: 20px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 0 20px var(--card-color);
+}
+
+/* Base background effect */
+.game-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 100% 100%, var(--card-color) 0%, transparent 40%);
+    opacity: 0.15;
+    transition: opacity 0.3s;
+}
+
+/* NEW: Dynamic Inner Border Effect (using pseudo-element and glow) */
+.game-card::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    /* Use conic gradient for a sweeping light effect */
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(transparent, rgba(255, 255, 255, 0.4), transparent 30%);
+    opacity: 0; /* Hidden by default */
+    z-index: 1;
+    transform: rotate(0deg);
+    transition: opacity 0.3s;
+}
+
+/* Card Hover Styles (Triggers the sweep animation) */
+.game-card:hover {
+    transform: scale(1.05);
+    /* Retain original box-shadow + add a slightly stronger central glow */
+    box-shadow: 0 0 50px var(--card-color), 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+.game-card:hover::after {
+    opacity: 1; /* Show the sweep effect */
+    animation: glow-sweep 4s linear infinite; /* Start the rotation */
+}
+
+/* NEW KEYFRAME: Creates the rotational/sweeping glow effect */
+@keyframes glow-sweep {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+.card-content {
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+}
+
+.card-content i {
+    font-size: 3.5rem;
+    margin-bottom: 15px;
+    color: var(--card-color);
+    text-shadow: 0 0 10px var(--card-color);
+}
+
+.card-content h3 {
+    font-size: 1.8rem;
+    color: var(--card-color);
+    margin-bottom: 5px;
+}
+
+.card-content p {
+    font-size: 0.9rem;
+    opacity: 0.7;
+    margin-bottom: 10px;
+}
+
+/* Status Tag Pulse Animation */
+.status-tag {
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 5px 15px;
+    border-radius: 15px;
+    background: rgba(0, 255, 0, 0.2);
+    color: #00FF00;
+    border: 1px solid #00FF00;
+    text-transform: uppercase;
+    animation: pulse-border 1.5s infinite alternate; /* Apply pulse */
+}
+
+@keyframes pulse-border {
+    from {
+        box-shadow: 0 0 5px #00FF00;
+        transform: scale(1);
+    }
+    to {
+        box-shadow: 0 0 15px #00FF00;
+        transform: scale(1.02);
+    }
+}
+/* Add this new keyframe block anywhere in your games.css */
+@keyframes energy-burst {
+    0% { transform: scale(1); opacity: 0.8; }
+    100% { transform: scale(3); opacity: 0; }
+}
+
+/* Base style for the burst overlay (to be created by JS) */
+.energy-burst-effect {
+    position: absolute;
+    inset: 0; /* Cover the entire card */
+    border-radius: 20px;
+    background: radial-gradient(circle at center, var(--card-color) 0%, transparent 70%);
+    opacity: 0;
+    z-index: 10;
+    pointer-events: none;
+}
